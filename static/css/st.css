@@ -1,0 +1,36 @@
+body{background-color:Cyan;}
+
+
+.container{
+width:70%;
+float:left;
+}
+h1{text-align:center;
+font-family: "Times New Roman", Times, serif;
+}
+h2{
+font-family: serif;
+color:MidnightBlue;
+font-size:40px;
+}
+.sidebar{
+width:30%;
+border-radius:20px;
+float:right;
+background-color:Azure;
+color:black;
+text-align:center}
+
+.li{
+padding-left:70px;
+text-align:left;}
+#p{
+text-family:italic;}
+#c{
+color:MidnightBlue;
+font-size:20px;
+font-style:italic;
+border-top:2px solid yellow
+}
+.para{
+text-size:20px;}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+{%block title_block%}Hyndhavi Blog Home Page{%endblock%}
+{%block content %}
+<h1>Hyndhavi Blog</h1>
+<hr>
+{% for post in post_list %}
+<a href="{{post.url}}"><h2>{{post.title}}</h2></a>"
+<i id ="p">Published on {{post.publish}} by {{post.author|title}}</i>
+{{post.body|truncatewords:30|linebreaks}}
+
+{%endfor%}
+<br><br><br>
+{%include 'testapp/page.html' with page=post_list%}
+{%endblock%}

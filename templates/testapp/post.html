@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+
+{%block title_block%}{{post.title}}{%endblock%}
+{%block content %}
+<h1>{{post.title}}</h1>
+<hr>
+<i id="p">Published on {{post.publish}} by {{post.author|title}}</i>
+<h6>{{post.body|linebreaks}}</h6>
+<div class="container" align="center">
+<a href="/{{post.id}}" class="btn btn-primary btn-lg" target="_blank">Share Post By Email</a>
+</div><br><br>
+{% with comments.count as comments_count%}
+<h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2>
+{%endwith%}
+{% if comments%}
+{% for com in comments %}
+<div id="c">
+Comment {{forloop.counter}} by {{com.name}} on {{com.created}}
+{{com.body|linebreaks}}
+</div>
+{%endfor%}
+{%else%}
+<p>There is no comments</p>
+{%endif%}
+<hr>
+{%if csubmit%}
+<h4>Your Comment is Successfully Submitted</h4>
+{%else%}
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary btn-lg" value="Send Comments">
+</form>
+{%endif%}
+{%endblock%}
