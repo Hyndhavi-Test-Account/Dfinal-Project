@@ -5,10 +5,12 @@
 <h1>Hyndhavi Blog</h1>
 <hr>
 {% for post in post_list %}
-<a href="{{post.url}}"><h2>{{post.title}}</h2></a>"
-<i id ="p">Published on {{post.publish}} by {{post.author|title}}</i>
-{{post.body|truncatewords:30|linebreaks}}
+<div class="list">
 
+    <a href="{{post.url}}"><h2>{{post.title}}</h2></a>
+    <i id ="p">Published on {{post.publish}} by {{post.author|title}}</i>
+<p>{{post.body|truncatewords:30|linebreaks}}</p>
+</div>
 {%endfor%}
 <br><br><br>
 {%include 'testapp/page.html' with page=post_list%}

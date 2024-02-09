@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+
+{%block title_block%}ADD YOUR POST{%endblock%}
+{%block content%}
+<br> <br>
+<div class="content">
+
+<form method="post">
+    {{form.as_p}}
+    {%csrf_token%}
+    <input type="submit" class="btn btn-primary"value="Submit" name="post">
+</form>
+</div>
+{%endblock%}

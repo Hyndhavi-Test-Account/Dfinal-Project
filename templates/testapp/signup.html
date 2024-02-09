@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+{%block title_block%}Login{%endblock%}
+{% block content %}
+<div class="container" >
+    <h1>Please SignUp</h1>
+
+    <form action="login/" method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+<!--        <input type="submit" class="btn btn-primary" value="SignUp" >-->
+        <a href="/accounts/login" class="btn btn-primary">SignUp</a>
+    </form>
+</div>
+{%endblock%}

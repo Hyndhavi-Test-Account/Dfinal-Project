@@ -1,14 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from testapp.models import Blog
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
-from testapp.forms import EmailForm, CommentForm
+from testapp.forms import EmailForm, CommentForm, AddPost, SignUp
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, logout
+from django.utils.text import slugify
+from django.shortcuts import HttpResponseRedirect
+from dcrud import settings
+from django.contrib import messages
 # Create your views here.
 
 
 def home(request):
     post_list = Blog.objects.all()
-    paginator = Paginator(post_list, 2)
+    paginator = Paginator(post_list, 3)
     page_num = request.GET.get('page')
     try:
         post_list = paginator.page(page_num)
@@ -20,7 +26,7 @@ def home(request):
 
     return render(request, "testapp/home.html", {'post_list':post_list})
 
-
+@login_required()
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Blog, slug=post, atatus="published", publish__year= year,
                              publish__month=month, publish__day=day)
@@ -54,3 +60,33 @@ def send_email(request, id):
     else:
         form = EmailForm()
     return render(request, 'testapp/email.html', {'form':form, 'post':post, 'sent':sent})
+
+@login_required()
+def add_post(request):
+    if request.method=='POST':
+        form = AddPost(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AddPost()
+    return render(request,'testapp/add.html',{'form':form})
+
+def log_out(request):
+        logout(request)
+        return render(request,"testapp/logged_out.html")
+        # return redirect('home')
+
+    # messages.success(request, ("You were logged out"))
+
+        # class LogoutView(View):
+#     def get(self, request):
+#         logout(request)
+#         return HttpResponseRedirect(settings.LOGIN_URL)
+def sign_up(request):
+    form = SignUp()
+    if request.method == "POST":
+        form = SignUp(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/accounts/login ")
+    return render(request,'testapp/signup.html', {'form':form})

@@ -3,10 +3,12 @@
 
 {%block title_block%}{{post.title}}{%endblock%}
 {%block content %}
+<div class="description">
 <h1>{{post.title}}</h1>
 <hr>
 <i id="p">Published on {{post.publish}} by {{post.author|title}}</i>
 <h6>{{post.body|linebreaks}}</h6>
+</div>
 <div class="container" align="center">
 <a href="/{{post.id}}" class="btn btn-primary btn-lg" target="_blank">Share Post By Email</a>
 </div><br><br>
@@ -27,6 +29,7 @@ Comment {{forloop.counter}} by {{com.name}} on {{com.created}}
 {%if csubmit%}
 <h4>Your Comment is Successfully Submitted</h4>
 {%else%}
+
 <form method="post">
     {{form.as_p}}
     {% csrf_token %}

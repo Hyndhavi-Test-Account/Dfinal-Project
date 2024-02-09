@@ -1,5 +1,6 @@
 from testapp.models import Blog
 from django import template
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 
 register = template.Library()
@@ -7,7 +8,7 @@ register = template.Library()
 @register.simple_tag
 def total_posts():
     return Blog.objects.count()
-
+@login_required()
 @register.inclusion_tag('testapp/list.html')
 def post_list(count=10):
     list = Blog.objects.order_by('-publish',)[:9]

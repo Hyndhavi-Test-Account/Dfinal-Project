@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+{%block title_block%}Logout{%endblock%}
+{% block content %}
+<!--<form method="post" action="{% url 'logout' %}">-->
+<!--    {% csrf_token %}-->
+<!--    <button type="submit">logout</button>-->
+</form>
+<div class="thank" align="center">
+<i style="font-size:50px;">Thank You For Spending Your Time In My blog</i>
+<a href="/accounts/login" class="btn btn-primary btn-lg">LOGIN</a>
+
+
+</div>
+{%endblock%}
