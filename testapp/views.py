@@ -10,7 +10,7 @@ from django.shortcuts import HttpResponseRedirect
 from dcrud import settings
 from django.contrib import messages
 # Create your views here.
-
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     post_list = Blog.objects.all()
@@ -76,17 +76,13 @@ def log_out(request):
         return render(request,"testapp/logged_out.html")
         # return redirect('home')
 
-    # messages.success(request, ("You were logged out"))
-
-        # class LogoutView(View):
-#     def get(self, request):
-#         logout(request)
-#         return HttpResponseRedirect(settings.LOGIN_URL)
 def sign_up(request):
-    form = SignUp()
+    form = SignUp
     if request.method == "POST":
         form = SignUp(request.POST)
         if form.is_valid():
-            form.save()
-        return redirect("/accounts/login ")
+            user = form.save()
+            user.set_password(user.password)
+            user.save()
+            return redirect("/accounts/login")
     return render(request,'testapp/signup.html', {'form':form})

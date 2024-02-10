@@ -5,11 +5,11 @@
 <div class="container" >
     <h1>Please SignUp</h1>
 
-    <form action="login/" method="post">
+    <form  method="post">
         {{form.as_p}}
         {% csrf_token %}
 <!--        <input type="submit" class="btn btn-primary" value="SignUp" >-->
-        <a href="/accounts/login" class="btn btn-primary">SignUp</a>
+        <input type="submit" class="btn btn-primary" value="SignUp">
     </form>
 </div>
 {%endblock%}

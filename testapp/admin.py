@@ -1,5 +1,6 @@
 from django.contrib import admin
 from testapp.models import Blog, Comments
+
 # Register your models here.
 
 class BlogAdmin(admin.ModelAdmin):
@@ -16,6 +17,8 @@ class CommentsAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'body', 'created', 'update', 'active']
     list_filter = ('active','update', 'created')
     search_fields = ('name', 'email', 'body')
+
+
 
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comments, CommentsAdmin)
